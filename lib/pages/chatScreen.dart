@@ -11,16 +11,25 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin{
   final TextEditingController _textController = new TextEditingController();
 
   Widget _buildTextComposer() {
-    return new Container(
-      child: new Row(
-        children: <Widget>[
-          new Flexible(
-            child: new TextField(
-              controller: _textController,
+    return IconTheme(
+      data: new IconThemeData(color: Theme.of(context).accentColor),
+      child: new Container(
+        child: new Row(
+          children: <Widget>[
+            new Flexible(
+              child: new TextField(
+                controller: _textController,
+              ),
             ),
-          )
-        ],
-      ),
+            new Container(
+              child: new IconButton(
+                icon: new Icon(Icons.send),
+                onPressed: () => {},
+              ),
+            )
+          ],
+        ),
+      )
     );
   }
 
