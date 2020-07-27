@@ -10,8 +10,8 @@ class ChatScreen extends StatefulWidget {
 class _ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-       child: new Text(widget.name),
+    return AppBar(
+       title: new Text(widget.name),
     );
   }
 }
