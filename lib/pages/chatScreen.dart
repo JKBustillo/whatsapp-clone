@@ -7,11 +7,38 @@ class ChatScreen extends StatefulWidget {
   _ChatScreenState createState() => _ChatScreenState();
 }
 
-class _ChatScreenState extends State<ChatScreen> {
+class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin{
+  final TextEditingController _textController = new TextEditingController();
+
+  Widget _buildTextComposer() {
+    return new Container(
+      child: new Row(
+        children: <Widget>[
+          new Flexible(
+            child: new TextField(
+              controller: _textController,
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return AppBar(
-       title: new Text(widget.name),
+    return Scaffold(
+      appBar: new AppBar(
+        title: new Text(widget.name),
+      ),
+      body: new Container(
+        child: new Column(
+          children: <Widget>[
+            new Container(
+              child: _buildTextComposer(),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
