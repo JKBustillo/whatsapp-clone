@@ -13,6 +13,7 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin{
   bool _isTyped = false;
 
   void _handleSubmit(String text) {
+    _textController.clear();
     ChatMessage message = new ChatMessage(
       text: text,
       animationController: new AnimationController(
@@ -24,6 +25,7 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin{
 
     setState(() {
       _messages.insert(0, message);
+      _isTyped = false;
     });
     message.animationController.forward();
 
