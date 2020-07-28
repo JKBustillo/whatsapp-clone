@@ -71,6 +71,7 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin{
           children: <Widget>[
             new Flexible(
               child: new ListView.builder(
+                reverse: true,
                 itemBuilder: (_, int i) => _messages[i],
                 itemCount: _messages.length,
               ),
@@ -100,14 +101,18 @@ class ChatMessage extends StatelessWidget {
           curve: Curves.easeOut
         ),
         child: new Container(
+          margin: const EdgeInsets.only(top: 5.0, right: 10.0, bottom: 5.0),
           child: new Row(
             children: <Widget> [
               new Expanded(
                 child: new Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
                   children: <Widget>[
-                    new Text(name),
                     new Container(
-                      child: new Text(text),
+                      child: new Text(
+                        text,
+                        style: TextStyle(fontSize: 17.0)
+                      ),
                     )
                   ],
                 ),
