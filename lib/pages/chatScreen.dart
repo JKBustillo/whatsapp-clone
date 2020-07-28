@@ -10,6 +10,10 @@ class ChatScreen extends StatefulWidget {
 class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin{
   final TextEditingController _textController = new TextEditingController();
 
+  void _handleSubmit(String text) {
+    print(text);
+  }
+
   Widget _buildTextComposer() {
     return IconTheme(
       data: new IconThemeData(color: Theme.of(context).accentColor),
@@ -24,7 +28,7 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin{
             new Container(
               child: new IconButton(
                 icon: new Icon(Icons.send),
-                onPressed: () => {},
+                onPressed: () => _handleSubmit(_textController.text),
               ),
             )
           ],
@@ -48,6 +52,39 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin{
           ],
         ),
       ),
+    );
+  }
+}
+
+class ChatMessage extends StatelessWidget {
+  ChatMessage({this.text, this.animationController, this.name});
+  final String text;
+  final AnimationController animationController;
+  final String name;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizeTransition(
+        sizeFactor: new CurvedAnimation(
+          parent: animationController,
+          curve: Curves.easeOut
+        ),
+        child: new Container(
+          child: new Row(
+            children: <Widget> [
+              new Expanded(
+                child: new Column(
+                  children: <Widget>[
+                    new Text(name),
+                    new Container(
+                      child: new Text(text),
+                    )
+                  ],
+                ),
+              )
+            ],
+          ),
+        ),
     );
   }
 }
