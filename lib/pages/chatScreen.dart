@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:whatsapp_clone/models/chat_model.dart';
 
 class ChatScreen extends StatefulWidget {
   final String name;
@@ -26,10 +27,10 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin{
     setState(() {
       _messages.insert(0, message);
       _isTyped = false;
+      var data = messageData.firstWhere((element) => element.name == widget.name);
+      data.message = message.text;
     });
     message.animationController.forward();
-
-    print(text);
   }
 
   Widget _buildTextComposer() {
@@ -46,6 +47,7 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin{
                     _isTyped = text.length > 0;
                   });
                 },
+                decoration: new InputDecoration.collapsed(hintText: "Write a message"),
               ),
             ),
             new Container(
