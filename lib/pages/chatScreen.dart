@@ -9,8 +9,23 @@ class ChatScreen extends StatefulWidget {
 
 class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin{
   final TextEditingController _textController = new TextEditingController();
+  final List<ChatMessage> _messages = <ChatMessage>[];
 
   void _handleSubmit(String text) {
+    ChatMessage message = new ChatMessage(
+      text: text,
+      animationController: new AnimationController(
+        duration: new Duration(milliseconds: 700),
+        vsync: this
+      ),
+      name: widget.name,
+    );
+
+    setState(() {
+      _messages.insert(0, message);
+    });
+    message.animationController.forward();
+
     print(text);
   }
 
@@ -46,6 +61,13 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin{
       body: new Container(
         child: new Column(
           children: <Widget>[
+            new Flexible(
+              child: new ListView.builder(
+                itemBuilder: (_, int i) => _messages[i],
+                itemCount: _messages.length,
+              ),
+            ),
+            new Divider(height: 1.0),
             new Container(
               child: _buildTextComposer(),
             ),
