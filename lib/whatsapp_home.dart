@@ -3,6 +3,7 @@ import 'package:whatsapp_clone/pages/call.dart';
 import 'package:whatsapp_clone/pages/camera.dart';
 import 'package:whatsapp_clone/pages/chatList.dart';
 import 'package:whatsapp_clone/pages/status.dart';
+import 'package:whatsapp_clone/pages/contacts.dart';
 
 class WhatsAppHome extends StatefulWidget {
   @override
@@ -47,7 +48,12 @@ class _WhatsAppHomeState extends State<WhatsAppHome> with SingleTickerProviderSt
            Icons.message,
            color: Colors.white,
          ),
-         onPressed: () {},
+         onPressed: () {
+           var route = new MaterialPageRoute(
+             builder: (BuildContext context) => new Contacts()
+           );
+           Navigator.of(context).push(route);
+         },
        ),
     );
   }
