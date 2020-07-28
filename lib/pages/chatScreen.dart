@@ -10,6 +10,7 @@ class ChatScreen extends StatefulWidget {
 class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin{
   final TextEditingController _textController = new TextEditingController();
   final List<ChatMessage> _messages = <ChatMessage>[];
+  bool _isTyped = false;
 
   void _handleSubmit(String text) {
     ChatMessage message = new ChatMessage(
@@ -38,12 +39,17 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin{
             new Flexible(
               child: new TextField(
                 controller: _textController,
+                onChanged: (String text) {
+                  setState(() {
+                    _isTyped = text.length > 0;
+                  });
+                },
               ),
             ),
             new Container(
               child: new IconButton(
                 icon: new Icon(Icons.send),
-                onPressed: () => _handleSubmit(_textController.text),
+                onPressed: _isTyped ? () => _handleSubmit(_textController.text): null,
               ),
             )
           ],
