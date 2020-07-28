@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:whatsapp_clone/pages/contactList.dart';
 
 class Contacts extends StatefulWidget {
 
@@ -13,6 +14,7 @@ class _ContactsState extends State<Contacts> {
        appBar: new AppBar(
          title: new Text("Select contact")
        ),
+       body: new ContactList(),
     );
   }
 }
